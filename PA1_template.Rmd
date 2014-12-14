@@ -79,7 +79,7 @@ round(median(NewStepByDay$meanSteps))
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
-Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a 
+Create a new factor variable in the dataset with two levels – “weekday” and “weekend” 
 
 ```{r}
 newactivity$dateType<-as.POSIXlt(newactivity$date)$wday
