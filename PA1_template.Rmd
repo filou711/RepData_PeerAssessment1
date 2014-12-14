@@ -11,13 +11,13 @@ activity= read.csv("activity.csv", header=TRUE, sep=',')
 ```
 
 ## What is mean total number of steps taken per day?
-1. Make a histogram of the total number of steps taken each day
+Make a histogram of the total number of steps taken each day
 ```{r}
 StepByDay <-aggregate(list(meanSteps=activity$steps), list(date=activity$date), sum, na.rm=TRUE)
 hist(StepByDay$meanSteps, breaks = 30, col = "red",border = "black", main="Mean total number of steps taken per day", xlab ="Total steps per day", ylab ="Number of day with this total steps area", xlim=c(0,25000))
 ```
 
-2. Calculate mean and median total number of steps taken per day
+Calculate mean and median total number of steps taken per day
 ```{r}
 round(mean(StepByDay$meanSteps))
 round(median(StepByDay$meanSteps))
@@ -25,13 +25,13 @@ round(median(StepByDay$meanSteps))
 
 ## What is the average daily activity pattern?
 
-1. Make a time series plot
+Make a time series plot
 ```{r}
 StepsByInterval <- aggregate(list(meanSteps=activity$steps), list(interval=activity$interval), mean, na.rm=TRUE)
 plot(StepsByInterval$meanSteps ~ StepsByInterval$interval  , col="black", main=" Average daily activity pattern", xlab='Interval during a day',  ylab="Mean of number of steps", type='l')
 ```
 
-2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 ```{r}
 StepsByInterval$interval[which.max(StepsByInterval$meanSteps)]
 ```
@@ -39,19 +39,19 @@ StepsByInterval$interval[which.max(StepsByInterval$meanSteps)]
 
 ## Imputing missing values
 
-1. Calculate and report the total number of missing values in the dataset
+Calculate and report the total number of missing values in the dataset
 ```{r}
 na_steps<-sum(is.na(activity$steps))
 na_date<-sum(is.na(activity$date))
 na_interval<-sum(is.na(activity$interval))
 ```
 
-2. Devise a strategy for filling in all of the missing values in the dataset.  
+Devise a strategy for filling in all of the missing values in the dataset:    
 During 61 days, corresponding to a significant sample, we can expect a repeat of values for a same intervals. 
 The nearest behavior for an interval is that which corresponds to the average of the same interval for the other days.
 So, we will fill the missing values in the dataset with  the mean for that 5-minute interval
 
-3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
+Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
 ```{r}
 newactivity <- activity
@@ -65,13 +65,13 @@ for(i in 1:l)
   }
 ```
 
-4.Make a histogram of the total number of steps taken each day
+Make a histogram of the total number of steps taken each day
 ```{r}
 NewStepByDay <-aggregate(list(meanSteps=newactivity$steps), list(date=newactivity$date), sum, na.rm=TRUE)
 hist(NewStepByDay$meanSteps, breaks = 30, col = "red",border = "black", main="Mean total number of steps taken per day", xlab ="Total steps per day", ylab ="Number of day with this total steps area", xlim=c(0,25000))
 ```
 
-5.Calculate and report the mean and median total number of steps taken per day.
+Calculate and report the mean and median total number of steps taken per day.
 
 ```{r}
 round(mean(NewStepByDay$meanSteps))
@@ -79,7 +79,7 @@ round(median(NewStepByDay$meanSteps))
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
-1. Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a 
+Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a 
 
 ```{r}
 newactivity$dateType<-as.POSIXlt(newactivity$date)$wday
@@ -104,7 +104,7 @@ for(i in 1:l)
 }
 ```
 
-2. Make a panel plot containing a time series plot
+Make a panel plot containing a time series plot
 
 ```{r}
 StepsByWeekEnd <- aggregate(newactivity$steps ~ newactivity$weekend + newactivity$interval,newactivity, mean)
