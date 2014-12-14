@@ -24,6 +24,7 @@ round(median(StepByDay$meanSteps))
 ```
 
 ## What is the average daily activity pattern?
+
 1. Make a time series plot
 ```{r}
 StepsByInterval <- aggregate(list(meanSteps=activity$steps), list(interval=activity$interval), mean, na.rm=TRUE)
@@ -37,6 +38,7 @@ StepsByInterval$interval[which.max(StepsByInterval$meanSteps)]
 
 
 ## Imputing missing values
+
 1. Calculate and report the total number of missing values in the dataset
 ```{r}
 na_steps<-sum(is.na(activity$steps))
