@@ -4,7 +4,9 @@ output:
   html_document:
     keep_md: true
 ---
-## Loading and preprocessing the data
+## Loading and preprocessing the data  
+The data was provided in a csv file, with three columns representing: the number of steps (steps), the date (date) and a label for the 5 minute interval (interval). Missing values in steps where coded as NA and dates were coded in the ‘YYYY-MM-DD’ format.
+
 ```{r}
 setwd("/Users/mac1/Desktop/DataCours")
 activity= read.csv("activity.csv", header=TRUE, sep=',')
@@ -39,7 +41,9 @@ StepsByInterval$interval[which.max(StepsByInterval$meanSteps)]
 
 ## Imputing missing values
 
-Calculate and report the total number of missing values in the dataset
+Calculate and report the total number of missing values in the dataset  
+The provided data contains a total of 2304, from which 2304 are missing number of steps, and none are missing dates or interval labels (i.e. all missing values are listed explicitly). As described in the PA1 instructions, the absence of these values might have an impact on the activity estimations; follows a description of the strategy I propose to fill in all the missing values in the dataset.
+
 ```{r}
 na_steps<-sum(is.na(activity$steps))
 na_date<-sum(is.na(activity$date))
