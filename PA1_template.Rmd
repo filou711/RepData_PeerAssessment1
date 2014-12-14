@@ -51,7 +51,10 @@ na_interval<-sum(is.na(activity$interval))
 ```
 
 Devise a strategy for filling in all of the missing values in the dataset:    
-During 61 days, corresponding to a significant sample, we can expect a repeat of values for a same intervals. 
+From the observations of total steps taken per day and average steps taken per interval,
+it seems that there is more variation between the number of steps taken day to day
+than in the average of steps taken during each interval across the different days (sample of 61 days corresponding 
+to a significant sample, we can expect a repeat of values for a same intervals across the different days).
 The nearest behavior for an interval is that which corresponds to the average of the same interval for the other days.
 So, we will fill the missing values in the dataset with  the mean for that 5-minute interval
 
